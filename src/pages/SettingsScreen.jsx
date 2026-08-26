@@ -5,7 +5,7 @@ import ToggleSwitch from '../components/ToggleSwitch.jsx'
 import BigButton from '../components/BigButton.jsx'
 
 export default function SettingsScreen() {
-  const [workspaceName, setWorkspaceName] = useState('Atlas Ops')
+  const [workspaceName, setWorkspaceName] = useState('Green Hill Ops')
   const [notifyEmail, setNotifyEmail] = useState(true)
   const [betaFeatures, setBetaFeatures] = useState(false)
   const [region, setRegion] = useState('us-east')
@@ -23,7 +23,7 @@ export default function SettingsScreen() {
             id="ws-name"
             value={workspaceName}
             onChange={(e) => setWorkspaceName(e.target.value)}
-            placeholder="e.g. Atlas"
+            placeholder="e.g. Green Hill"
           />
 
           <div className="mb-2 flex items-center gap-4">

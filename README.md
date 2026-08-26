@@ -1,10 +1,14 @@
-# Atlas Ops Console
+# Green Hill
 
 A small, realistic internal ops tool — dashboard, billing/invoices, AR aging,
 team & access, integrations, reports, and settings. Built to be a clean,
 independent base for a Figma "what best looks like" reference package: a
 matching **Design System** file, an **App Screens** file built from that
 system's components, and this codebase wired up with **Code Connect**.
+
+Named after Green Hill Zone — the tutorial level every Sonic the Hedgehog
+player learns the game on. This is that: the level new TAMs run through to
+learn the ecosystem, before they head into the real thing.
 
 It is intentionally small and has no backend: all data is static and held in
 component state, so there's nothing to time out, fail to load, or flake in a
@@ -24,6 +28,12 @@ synced with or dependent on the original training repo.
 React 18 + Vite + React Router + Tailwind, plain CSS variables for
 light/dark theming (see `src/index.css`).
 
+## Curriculum structure
+
+- **Act 1 — Foundations & Fidelity**: Design System, Dev Mode, Code Connect
+- **Act 2 — AI & Exploration**: Make Kits, Make Local, Code Layers
+- **Special Stage**: optional/advanced material (e.g. legacy-retrofit exercises)
+
 ## Screens
 
 - **Dashboard** (`/dashboard`) — overview stats + recent accounts table
@@ -37,10 +47,9 @@ light/dark theming (see `src/index.css`).
 ## Components
 
 `BigButton`, `CardThing`, `InputField`, `NavBar`, `TableV2`, `ThemeToggle`,
-`ToggleSwitch`, plus newly added `StatusBadge`, `InlineBanner`, `EmptyState`,
-and `Modal` — covering the states an enterprise ops screen actually needs:
-success/warning/danger status, inline errors, empty data, and confirm/form
-dialogs.
+`ToggleSwitch`, plus `StatusBadge`, `InlineBanner`, `EmptyState`, and `Modal`
+— covering the states an enterprise ops screen actually needs: success/
+warning/danger status, inline errors, empty data, and confirm/form dialogs.
 
 ## Getting started
 
