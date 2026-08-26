@@ -9,9 +9,9 @@ import { Modal } from '../components/Modal.jsx'
 const STATUS_TONE = { Paid: 'success', Overdue: 'danger' }
 
 const invoices = [
-  { id: 'INV-2401', customer: 'Northwind LLC', amount: '$4,200', status: 'Paid' },
-  { id: 'INV-2402', customer: 'Contoso', amount: '$890', status: 'Paid' },
-  { id: 'INV-2403', customer: 'Fabrikam', amount: '$120', status: 'Overdue' },
+  { id: 'INV-2401', customer: 'Emerald Hill Trading Co.', amount: '$4,200', status: 'Paid' },
+  { id: 'INV-2402', customer: 'Marble Works Manufacturing', amount: '$890', status: 'Paid' },
+  { id: 'INV-2403', customer: 'Casino Night Holdings', amount: '$120', status: 'Overdue' },
 ]
 
 const invoiceRows = {

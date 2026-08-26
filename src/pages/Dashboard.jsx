@@ -8,11 +8,11 @@ import styles from './Dashboard.module.css'
 const STATUS_TONE = { Active: 'success', 'At risk': 'warning' }
 
 const accounts = [
-  { id: 'acc-1', name: 'Northwind LLC', plan: 'Enterprise', mrr: '$4,200', status: 'Active' },
-  { id: 'acc-2', name: 'Contoso', plan: 'Pro', mrr: '$890', status: 'Active' },
-  { id: 'acc-3', name: 'Fabrikam', plan: 'Starter', mrr: '$120', status: 'At risk' },
-  { id: 'acc-4', name: 'Adventure Co', plan: 'Pro', mrr: '$650', status: 'Active' },
-  { id: 'acc-5', name: 'Tailspin Toys', plan: 'Enterprise', mrr: '$12,400', status: 'Active' },
+  { id: 'acc-1', name: 'Emerald Hill Trading Co.', plan: 'Enterprise', mrr: '$4,200', status: 'Active' },
+  { id: 'acc-2', name: 'Marble Works Manufacturing', plan: 'Pro', mrr: '$890', status: 'Active' },
+  { id: 'acc-3', name: 'Casino Night Holdings', plan: 'Starter', mrr: '$120', status: 'At risk' },
+  { id: 'acc-4', name: 'Chemical Plant Logistics', plan: 'Pro', mrr: '$650', status: 'Active' },
+  { id: 'acc-5', name: 'Starlight Freight', plan: 'Enterprise', mrr: '$12,400', status: 'Active' },
 ]
 
 const tableStuff = {
