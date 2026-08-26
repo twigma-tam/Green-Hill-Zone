@@ -1,0 +1,69 @@
+{
+  "pointAndEdit": {
+    "paths": {
+      "prefer": [
+        "src/pages/BillingAgingReport.jsx",
+        "src/pages/BillingInvoices.jsx",
+        "src/pages/Dashboard.jsx",
+        "src/pages/EmptyThing.jsx",
+        "src/pages/IntegrationsPage.jsx",
+        "src/pages/SettingsScreen.jsx",
+        "src/pages/TeamMembersScreen.jsx"
+      ],
+      "deprioritize": [
+        "src/App.jsx",
+        "src/index.css",
+        "src/main.jsx",
+        "src/useTheme.js",
+        "src/components/BigButton.jsx",
+        "src/components/CardThing.jsx",
+        "src/components/InputField.jsx",
+        "src/components/NavBar.jsx",
+        "src/components/TableV2.jsx",
+        "src/components/ThemeToggle.jsx",
+        "src/components/ToggleSwitch.jsx"
+      ],
+      "local-library": [
+        "src/components/**"
+      ],
+      "external-library": [],
+      "exclude": [
+        ".claude/settings.local.json",
+        ".figma/make/dev",
+        ".figma/make/env",
+        ".figma/make/install",
+        ".figma/make/setup",
+        ".figma/make/verify",
+        ".gitignore",
+        ".playwright-mcp/console-2026-08-04T15-45-31-161Z.log",
+        ".playwright-mcp/page-2026-08-04T15-45-31-447Z.yml",
+        ".playwright-mcp/page-2026-08-04T15-45-55-079Z.yml",
+        ".playwright-mcp/page-2026-08-04T15-47-58-517Z.png",
+        "README.md",
+        "TRAINING_ISSUES.md",
+        "eslint.config.js",
+        "index.html",
+        "package-lock.json",
+        "package.json",
+        "postcss.config.js",
+        "public/favicon.svg",
+        "public/icons.svg",
+        "src/assets/hero.png",
+        "src/assets/react.svg",
+        "src/assets/vite.svg",
+        "src/pages/Dashboard.module.css",
+        "tailwind.config.js",
+        "vite.config.js",
+        "**/.next/**",
+        "**/build/**",
+        "**/coverage/**",
+        "**/dist/**",
+        "**/out/**",
+        "**/target/**"
+      ]
+    },
+    "pathClassification": {
+      "classifier": "catboost-o4"
+    }
+  }
+}

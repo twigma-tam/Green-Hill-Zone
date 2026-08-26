@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+echo "Checking system dependencies..."
+
+NODE_VERSION="$(node --version 2>/dev/null || echo "none")"
+if [[ "$NODE_VERSION" == "none" ]]; then
+	echo "Installing node"
+	brew install node
+fi
+echo "Node ${NODE_VERSION} OK"
+
+echo "System dependencies verified."

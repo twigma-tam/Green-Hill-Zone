@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+echo "Starting development server on port ${PORT:-5173}"
+npm run dev -- --host --port "${PORT:-5173}"

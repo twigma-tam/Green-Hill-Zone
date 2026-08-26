@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Single source of truth for the app palette.
+ * Light values live in :root, dark overrides in .dark (toggled on <html>).
+ * Components reference these via var(--token) so both themes stay in sync.
+ */
+:root {
+  color-scheme: light;
+
+  --bg: #f3f4f6;
+  --bg-alt: #f9fafb;
+  --bg-accent: #eff6ff;
+  --surface: #ffffff;
+
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --divider: #d1d5db;
+
+  --text-strong: #111827;
+  --text: #374151;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  --brand: #2563eb;
+  --brand-link: #3b82f6;
+  --brand-strong: #1e40af;
+  --on-brand: #ffffff;
+
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --bg: #0b1220;
+  --bg-alt: #111a2e;
+  --bg-accent: #0e1a33;
+  --surface: #1a2436;
+
+  --border: #2b3648;
+  --border-strong: #3b4a61;
+  --divider: #3b4a61;
+
+  --text-strong: #f8fafc;
+  --text: #e2e8f0;
+  --text-secondary: #a9b4c4;
+  --text-muted: #8593a6;
+
+  --brand: #3b82f6;
+  --brand-link: #60a5fa;
+  --brand-strong: #93c5fd;
+  --on-brand: #ffffff;
+
+  --success: #34d399;
+  --success-bg: #0d2818;
+  --warning: #fbbf24;
+  --warning-bg: #2b210a;
+  --danger: #f87171;
+  --danger-bg: #2c1414;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Ease the transition when the theme flips. */
+body,
+header,
+main,
+div,
+table,
+th,
+td,
+input,
+select,
+button,
+a,
+li {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
