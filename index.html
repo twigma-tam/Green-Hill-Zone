@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Green Hill</title>
     <script>
-      // Apply the saved (or system) theme before paint to avoid a flash.
+      // Apply the saved (or system) mode before paint to avoid a flash.
       (function () {
         try {
           var saved = localStorage.getItem('theme');
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (saved === 'dark' || (!saved && prefersDark)) {
+          var classForMode = { dark: 'dark', '16bit': 'mode-16bit', '32bit': 'mode-32bit' };
+          if (saved && classForMode[saved]) {
+            document.documentElement.classList.add(classForMode[saved]);
+          } else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark');
           }
         } catch (e) {}

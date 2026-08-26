@@ -67,6 +67,125 @@
   --danger-bg: #2c1414;
 }
 
+/*
+ * Two extra "modes" alongside light/dark — an easter egg nod to Green Hill's
+ * namesake. Same token names, so every component that already reads
+ * var(--token) picks these up for free with no component changes needed.
+ * 16-bit = Genesis-era Green Hill: bright, flat, hard-edged, no shadows.
+ * 32-bit = Saturn/CD-era: darker, neon, a little glow and scanline haze.
+ */
+.mode-16bit {
+  color-scheme: light;
+
+  --bg: #49a8f0;
+  --bg-alt: #2f8fe0;
+  --bg-accent: #ffe066;
+  --surface: #fdf6e3;
+
+  --border: #16324a;
+  --border-strong: #0d2233;
+  --divider: #16324a;
+
+  --text-strong: #0d2233;
+  --text: #16324a;
+  --text-secondary: #2c5170;
+  --text-muted: #5b7f9c;
+
+  --brand: #1c54b2;
+  --brand-link: #2563eb;
+  --brand-strong: #123a7d;
+  --on-brand: #ffffff;
+
+  --success: #3aa655;
+  --success-bg: #d7f2dd;
+  --warning: #b8860b;
+  --warning-bg: #fff3c4;
+  --danger: #d32f2f;
+  --danger-bg: #fde2e0;
+}
+
+.mode-32bit {
+  color-scheme: dark;
+
+  --bg: #1a1035;
+  --bg-alt: #241246;
+  --bg-accent: #3a1c63;
+  --surface: #2a1550;
+
+  --border: #6b3fa0;
+  --border-strong: #8a5cc4;
+  --divider: #6b3fa0;
+
+  --text-strong: #f5e9ff;
+  --text: #e0c8ff;
+  --text-secondary: #b98fe0;
+  --text-muted: #8f6bb8;
+
+  --brand: #ff2e88;
+  --brand-link: #ff6ec7;
+  --brand-strong: #c2166a;
+  --on-brand: #1a1035;
+
+  --success: #21e6a1;
+  --success-bg: #103228;
+  --warning: #ffd23f;
+  --warning-bg: #3a2e0a;
+  --danger: #ff3860;
+  --danger-bg: #3a0f1c;
+}
+
+/* Retro typography — a monospace stack stands in for a pixel font. Swapping
+   in a self-hosted pixel face (e.g. Press Start 2P) later is a drop-in change
+   here; this build has no network access to fetch a webfont. */
+html.mode-16bit body,
+html.mode-32bit body {
+  font-family: 'Courier New', ui-monospace, SFMono-Regular, monospace;
+  letter-spacing: 0.02em;
+}
+
+/* 16-bit: flat and blocky, no rounded corners or shadows. */
+html.mode-16bit * {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 32-bit: a little more polish — small radius, a soft glow on brand color. */
+html.mode-32bit * {
+  border-radius: 4px !important;
+}
+html.mode-32bit button,
+html.mode-32bit a {
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* Scanline haze, both retro modes. Fixed overlay, purely decorative. */
+html.mode-16bit body::after,
+html.mode-32bit body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: multiply;
+}
+html.mode-32bit body::after {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.06) 0px,
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: screen;
+}
+
 body {
   margin: 0;
   background-color: var(--bg);
