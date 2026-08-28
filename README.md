@@ -1,4 +1,21 @@
-# Green Hill
+# Green Hill Zone - A Figma Starter Pack
+
+The goal of this repo & related files is to provide a healthy starter pack for new joiners, to play around with and experiment while onboarding on the Figma ecosystem. 
+This is linked to the [Green Hill Design System File](https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ/COPY-ME---Green-Hill-%E2%80%94-Design-System?node-id=0-1&p=f&t=ag0zJz3irrjAvTHQ-0 "COPY ME - Green Hill - Design System in CES Org") & the [Green Hill App Screens File](https://www.figma.com/design/wo6sV16gT4kNbl62wiByi8/COPY-ME---Green-Hill-%E2%80%94-App-Screens?node-id=0-1&p=f&t=Wy8sv5EJLxKOhYzi-0 "COPY ME - Green Hill - App Screens in CES Org")
+
+# How to get started?
+
+1 - Copy this Repo to your private github, so you can play around and commit changes without breaking this template
+2 - Copy the two files in CES Org (or save them locally, then import in your private Sandbox)
+3 - Update the .env-example file:
+   - Add your own personal access token
+   - Add the file key for the Design System file
+   - update the name to remove "-example"
+
+
+
+
+# About this App
 
 A small, realistic internal ops tool — dashboard, billing/invoices, AR aging,
 team & access, integrations, reports, and settings. Built to be a clean,
