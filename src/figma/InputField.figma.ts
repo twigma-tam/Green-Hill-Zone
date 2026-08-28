@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=2-786
+// url=<FIGMA_INPUT_FIELD>
 // source=src/components/InputField.jsx
 // component=InputField
 import figma from 'figma'

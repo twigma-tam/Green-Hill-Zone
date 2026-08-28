@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=23-50
+// url=<FIGMA_BIG_BUTTON>
 // source=src/components/BigButton.jsx
 // component=BigButton
 import figma from 'figma'

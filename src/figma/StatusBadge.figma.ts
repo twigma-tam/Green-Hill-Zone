@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=2-735
+// url=<FIGMA_STATUS_BADGE>
 // source=src/components/StatusBadge.jsx
 // component=StatusBadge
 import figma from 'figma'

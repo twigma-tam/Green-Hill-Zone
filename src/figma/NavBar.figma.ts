@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=4-27
+// url=<FIGMA_NAV_BAR>
 // source=src/components/NavBar.jsx
 // component=NavBar
 import figma from 'figma'

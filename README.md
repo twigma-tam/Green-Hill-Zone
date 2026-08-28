@@ -9,8 +9,10 @@ This is linked to the [Green Hill Design System File](https://www.figma.com/desi
 2 - Copy the two files in CES Org (or save them locally, then import in your private Sandbox)
 3 - Update the .env-example file:
    - Add your own personal access token
-   - Add the file key for the Design System file
    - update the name to remove "-example"
+4 - Connect this repo's Code Connect setup to your copy of the Design System
+    file — see "Connecting this repo to a duplicated Figma file" in
+    `src/figma/README.md`
 
 
 

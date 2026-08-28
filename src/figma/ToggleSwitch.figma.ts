@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=23-138
+// url=<FIGMA_TOGGLE_SWITCH>
 // source=src/components/ToggleSwitch.jsx
 // component=ToggleSwitch
 import figma from 'figma'

@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=24-63
+// url=<FIGMA_SELECT>
 // source=src/components/Select.jsx
 // component=Select
 import figma from 'figma'

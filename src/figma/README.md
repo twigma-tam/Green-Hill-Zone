@@ -24,39 +24,45 @@ Two things are connected, and they are not the same:
 
 ```bash
 npm install
-cp .env-example .env   # then fill in FIGMA_ACCESS_TOKEN and FIGMA_FILE_KEY
+cp .env-example .env   # then fill in FIGMA_ACCESS_TOKEN
 npm run figma:publish
 ```
 
 Verify with `npm run figma:parse` first — it type-checks every template
 without publishing.
 
-## Repointing at a copy of the Design System file
+## documentUrlSubstitutions
 
-Every template's `// url=` comment uses a placeholder instead of a literal file
-key:
+This repo uses the same pattern as Figma's [Simple Design System
+(SDS)](https://github.com/figma/sds): every template's `// url=` comment is a
+placeholder, not a literal Figma URL —
 
 ```
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=23-50
+// url=<FIGMA_BIG_BUTTON>
 ```
 
-`FIGMA_FILE_KEY` in `.env` is the single source of truth for that placeholder.
-`npm run figma:parse` / `figma:publish` / `figma:unpublish` all run
-`scripts/generate-figma-config.js` first, which reads `FIGMA_FILE_KEY` and
-writes `.figma.config.generated.json` (gitignored, not committed) — a copy of
-`figma.config.json` with the real key substituted in — then point the CLI at
-it via `--config`. To connect this repo to a duplicate of the Design System
-file, change `FIGMA_FILE_KEY` in `.env`; nothing else needs to change.
+— and `figma.config.json`'s `documentUrlSubstitutions` maps each placeholder to
+its real `https://www.figma.com/design/<file key>?node-id=<node id>`. This
+keeps templates file-agnostic and colocates every Figma-file-specific value in
+one place, named so you can find the component without following a link:
+`<FIGMA_[GROUP]_[COMPONENT]>`.
 
-Do **not** run `npx figma connect parse|publish` directly — it'll use
-`figma.config.json`'s committed placeholder value and fail. Always go through
-the `npm run figma:*` scripts.
+This is a real, documented option in the Code Connect CLI — see [Configuring
+your project](https://developers.figma.com/docs/code-connect/api/config-file/).
 
-Note: the underlying mechanism, `documentUrlSubstitutions`, is a real,
-functional option in the Code Connect CLI, but it's undocumented in Figma's
-public docs — a future CLI upgrade could change or drop it without notice.
-Re-run `npm run figma:parse` after any `@figma/code-connect` version bump to
-confirm it still resolves.
+## Connecting this repo to a duplicated Figma file
+
+Node-ids survive a Figma file **duplicate** (confirmed empirically against a
+copy of this Design System file — every one of the 16 node-ids below resolved
+to the identical component). So:
+
+- Duplicate the Design System file
+- Update the urls in `figma.config.json` to point to your file
+  - The file key (e.g. `7B95vlwukQ3hKs4G4WH5P5`) should be the only change
+    needed, unless you're creating new components, or detaching and
+    recreating existing ones
+- Set up your `.env` (see above)
+- `npm run figma:publish` should now work against your copy
 
 ## What each template maps
 

@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=24-180
+// url=<FIGMA_TABLE_V2>
 // source=src/components/TableV2.jsx
 // component=TableV2
 import figma from 'figma'

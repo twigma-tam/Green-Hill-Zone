@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=2-831
+// url=<FIGMA_INLINE_BANNER>
 // source=src/components/InlineBanner.jsx
 // component=InlineBanner
 import figma from 'figma'

@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=2-794
+// url=<FIGMA_CARD_THING>
 // source=src/components/CardThing.jsx
 // component=CardThing
 import figma from 'figma'

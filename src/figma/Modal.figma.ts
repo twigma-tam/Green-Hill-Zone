@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=3-24
+// url=<FIGMA_MODAL>
 // source=src/components/Modal.jsx
 // component=Modal
 import figma from 'figma'
