@@ -31,6 +31,32 @@ npx figma connect publish
 Verify with `npx figma connect parse` first — it type-checks every template
 without publishing.
 
+## Repointing at a copy of the Design System file
+
+Every template's `// url=` comment uses a placeholder instead of a literal file
+key:
+
+```
+// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=23-50
+```
+
+`figma.config.json`'s `documentUrlSubstitutions` maps that placeholder to the
+real file key at parse/publish time. To connect this repo to a duplicate of the
+Design System file, update the one value there — no need to touch any
+`.figma.ts` file:
+
+```json
+"documentUrlSubstitutions": {
+  "{{DESIGN_SYSTEM_FILE_KEY}}": "<new file key>"
+}
+```
+
+Note: `documentUrlSubstitutions` is a real, functional option in the Code
+Connect CLI, but it's undocumented in Figma's public docs — a future CLI
+upgrade could change or drop it without notice. Re-run `npx figma connect
+parse` after any `@figma/code-connect` version bump to confirm it still
+resolves.
+
 ## What each template maps
 
 | Figma property | Code prop | Notes |

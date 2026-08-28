@@ -8,6 +8,9 @@
     },
     "importPaths": {
       "src/components/*": "@/components"
+    },
+    "documentUrlSubstitutions": {
+      "{{DESIGN_SYSTEM_FILE_KEY}}": "7B95vlwukQ3hKs4G4WH5P5"
     }
   }
 }

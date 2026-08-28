@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/7B95vlwukQ3hKs4G4WH5P5/Green-Hill-Design-System?node-id=2-860
+// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=2-860
 // source=src/components/TableV2.jsx
 // component=TableV2
 import figma from 'figma'

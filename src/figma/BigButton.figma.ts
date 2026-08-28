@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/7B95vlwukQ3hKs4G4WH5P5/Green-Hill-Design-System?node-id=23-50
+// url=https://www.figma.com/design/{{DESIGN_SYSTEM_FILE_KEY}}/Green-Hill-Design-System?node-id=23-50
 // source=src/components/BigButton.jsx
 // component=BigButton
 import figma from 'figma'
