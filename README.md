@@ -9,10 +9,13 @@ This is linked to the [Green Hill Design System File](https://www.figma.com/desi
 2 - Copy the two files in CES Org (or save them locally, then import in your private Sandbox)
 3 - Update the .env-example file:
    - Add your own personal access token
+   - Add the file key for the Design System file
    - update the name to remove "-example"
-   - 
 
 
+
+
+# About this App
 
 A small, realistic internal ops tool — dashboard, billing/invoices, AR aging,
 team & access, integrations, reports, and settings. Built to be a clean,
