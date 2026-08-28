@@ -25,8 +25,10 @@ synced with or dependent on the original training repo.
 
 ## Stack
 
-React 18 + Vite + React Router + Tailwind, plain CSS variables for
-light/dark theming (see `src/index.css`).
+React 18 + Vite + React Router + Tailwind. Theming is plain CSS custom
+properties in a two-tier token layer — raw primitives, then semantic tokens
+that alias them — across four modes: light, dark, 16-bit and 32-bit
+(see `src/index.css`).
 
 ## Curriculum structure
 
@@ -46,7 +48,7 @@ light/dark theming (see `src/index.css`).
 
 ## Components
 
-`BigButton`, `CardThing`, `InputField`, `NavBar`, `TableV2`, `ThemeToggle`,
+`BigButton`, `CardThing`, `InputField`, `Select`, `NavBar`, `TableV2`, `ThemeToggle`,
 `ToggleSwitch`, plus `StatusBadge`, `InlineBanner`, `EmptyState`, and `Modal`
 — covering the states an enterprise ops screen actually needs: success/
 warning/danger status, inline errors, empty data, and confirm/form dialogs.
@@ -62,4 +64,10 @@ npm run dev
 
 1. Build the Figma **Design System** file from these components/tokens.
 2. Build the Figma **App Screens** file using that design system.
-3. Wire up **Code Connect** (`figma.config.json` + `.figma.tsx` per component).
+3. ~~Wire up **Code Connect**~~ — done. See `src/figma/README.md`.
+
+   Use **template files**, not the parser-based `.figma.tsx` /
+   `figma.connect()` format — Figma has deprecated framework-specific parsers
+   and they receive no further updates or support. Code Connect also requires
+   the components to be published to a team library, on an Organization or
+   Enterprise plan.

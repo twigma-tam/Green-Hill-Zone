@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import NavBar from '../components/NavBar.jsx'
-import BigButton from '../components/BigButton.jsx'
-import { InputField } from '../components/InputField.jsx'
-import { Modal } from '../components/Modal.jsx'
+import NavBar from '@/components/NavBar.jsx'
+import BigButton from '@/components/BigButton.jsx'
+import { InputField } from '@/components/InputField.jsx'
+import { Select } from '@/components/Select.jsx'
+import { Modal } from '@/components/Modal.jsx'
 
 const people = [
   { id: '1', name: 'Alex Rivera', role: 'Admin' },
@@ -28,8 +29,8 @@ export default function TeamMembersScreen() {
     <div className="min-h-screen bg-[var(--bg)]">
       <NavBar />
       <div className="max-w-xl px-6 py-8">
-        <h1 className="mb-2 text-2xl font-semibold text-[var(--text)]">Team & access</h1>
-        <p className="mb-6 text-sm text-[var(--text-secondary)]">
+        <h1 className="mb-2 text-24 font-semibold text-[var(--text)]">Team & access</h1>
+        <p className="mb-6 text-14 text-[var(--text-secondary)]">
           Invite members, then wire billing and integrations from the header nav.
         </p>
 
@@ -37,7 +38,7 @@ export default function TeamMembersScreen() {
           {people.map((p) => (
             <li
               key={p.id}
-              className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3 text-sm"
+              className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3 text-14"
             >
               <span className="font-semibold text-[var(--text)]">{p.name}</span>
               <span className="text-[var(--text-secondary)]">{p.role}</span>
@@ -54,7 +55,7 @@ export default function TeamMembersScreen() {
           </BigButton>
         </div>
 
-        <p className="mt-6 text-sm text-[var(--text-muted)]">
+        <p className="mt-6 text-14 text-[var(--text-muted)]">
           Also try the{' '}
           <Link to="/integrations" className="text-[var(--brand-link)] no-underline hover:underline">
             integrations hub
@@ -66,6 +67,7 @@ export default function TeamMembersScreen() {
       <Modal
         open={inviteOpen}
         onClose={closeInvite}
+        type="form"
         title="Invite a team member"
         footer={
           <>
@@ -79,25 +81,27 @@ export default function TeamMembersScreen() {
         }
       >
         <InputField
-          labelText="Email address"
+          label="Email address"
           id="invite-email"
+          type="email"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@company.com"
+          helpText="They'll get an invite link that expires in 7 days."
         />
-        <label htmlFor="invite-role" className="mb-2 block text-sm font-semibold text-[var(--text)]">
-          Role
-        </label>
-        <select
+        <Select
+          label="Role"
           id="invite-role"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          className="w-full rounded-md border border-[var(--border-strong)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-strong)]"
-        >
-          <option value="Admin">Admin</option>
-          <option value="Editor">Editor</option>
-          <option value="Viewer">Viewer</option>
-        </select>
+          helpText="Editors can change data. Viewers cannot."
+          options={[
+            { value: 'Admin', label: 'Admin' },
+            { value: 'Editor', label: 'Editor' },
+            { value: 'Viewer', label: 'Viewer' },
+          ]}
+        />
       </Modal>
     </div>
   )

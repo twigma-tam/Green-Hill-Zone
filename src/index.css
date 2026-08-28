@@ -2,157 +2,431 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Single source of truth for the app palette.
- * Light values live in :root, dark overrides in .dark (toggled on <html>).
- * Components reference these via var(--token) so both themes stay in sync.
- */
+/* ============================================================================
+ * TIER 1 — PRIMITIVES
+ * Raw values only. Never referenced directly by a component; semantic tokens
+ * alias them. Grouped into palette families rather than one universal ramp,
+ * because Green Hill genuinely carries four palettes: a Tailwind-derived grey
+ * ramp (light), a bespoke navy ramp (dark), and two era-specific console
+ * palettes (Genesis / Saturn) that share no values with the others.
+ *
+ * These live on :root only and are never overridden per mode.
+ * ==========================================================================*/
+:root {
+  /* --- base --- */
+  --white: #ffffff;
+
+  /* --- gray: light-mode neutrals (Tailwind gray) --- */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+
+  /* --- navy: dark-mode neutrals (bespoke) --- */
+  --navy-50: #f8fafc;
+  --navy-100: #e2e8f0;
+  --navy-300: #a9b4c4;
+  --navy-400: #8593a6;
+  --navy-600: #3b4a61;
+  --navy-700: #2b3648;
+  --navy-800: #1a2436;
+  --navy-850: #111a2e;
+  --navy-900: #0e1a33;
+  --navy-950: #0b1220;
+
+  /* --- blue: brand ramp, shared across light + dark + 16-bit --- */
+  --blue-50: #eff6ff;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-800: #1e40af;
+
+  /* --- emerald / amber / red: status ramps, shared across light + dark --- */
+  --emerald-50: #ecfdf5;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-950: #0d2818;
+
+  --amber-50: #fffbeb;
+  --amber-400: #fbbf24;
+  --amber-600: #d97706;
+  --amber-950: #2b210a;
+
+  --red-50: #fef2f2;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-950: #2c1414;
+
+  /* --- genesis: 16-bit palette (Mega Drive era) --- */
+  --genesis-sky: #49a8f0;
+  --genesis-sky-deep: #2f8fe0;
+  --genesis-ring-yellow: #ffe066;
+  --genesis-sand: #fdf6e3;
+  --genesis-ink: #16324a;
+  --genesis-ink-deep: #0d2233;
+  --genesis-ink-soft: #2c5170;
+  --genesis-ink-faint: #5b7f9c;
+  --genesis-blue: #1c54b2;
+  --genesis-blue-deep: #123a7d;
+  --genesis-green: #3aa655;
+  --genesis-green-pale: #d7f2dd;
+  --genesis-gold: #b8860b;
+  --genesis-gold-pale: #fff3c4;
+  --genesis-red: #d32f2f;
+  --genesis-red-pale: #fde2e0;
+
+  /* --- saturn: 32-bit palette (Saturn / CD era) --- */
+  --saturn-void: #1a1035;
+  --saturn-void-lift: #241246;
+  --saturn-violet-deep: #3a1c63;
+  --saturn-violet: #2a1550;
+  --saturn-violet-mid: #6b3fa0;
+  --saturn-violet-bright: #8a5cc4;
+  --saturn-lavender-pale: #f5e9ff;
+  --saturn-lavender: #e0c8ff;
+  --saturn-lavender-mid: #b98fe0;
+  --saturn-lavender-dim: #8f6bb8;
+  --saturn-magenta: #ff2e88;
+  --saturn-magenta-deep: #c2166a;
+  --saturn-pink: #ff6ec7;
+  --saturn-mint: #21e6a1;
+  --saturn-mint-deep: #103228;
+  --saturn-gold: #ffd23f;
+  --saturn-gold-deep: #3a2e0a;
+  --saturn-crimson: #ff3860;
+  --saturn-crimson-deep: #3a0f1c;
+
+  /* --- elevation: translucent shadow inks + an offset/blur scale ---
+     These are separate primitives rather than alpha applied to an existing
+     colour, because a token alias cannot change opacity — the transparency has
+     to live in the primitive itself. */
+  --alpha-black-0: rgb(0 0 0 / 0);
+  --alpha-black-5: rgb(0 0 0 / 0.05);
+  --alpha-black-12: rgb(0 0 0 / 0.12);
+  --alpha-black-40: rgb(0 0 0 / 0.4);
+  --alpha-black-50: rgb(0 0 0 / 0.5);
+  --saturn-magenta-25: rgb(255 46 136 / 0.25);
+  --saturn-magenta-35: rgb(255 46 136 / 0.35);
+
+  --elevation-scale-neg-4: -4px;
+  --elevation-scale-0: 0px;
+  --elevation-scale-1: 1px;
+  --elevation-scale-2: 2px;
+  --elevation-scale-6: 6px;
+  --elevation-scale-10: 10px;
+  --elevation-scale-18: 18px;
+  --elevation-scale-20: 20px;
+
+  /* --- spacing scale ---
+     A 4pt grid with the half-steps Tailwind provides (2 / 6 / 10), because
+     those are the values this codebase actually uses: StatusBadge is px-2.5
+     (10px) and BigButton sm is py-1.5 (6px). Naming is by pixel value, not by
+     t-shirt size, so a token name and a rendered value are the same fact. */
+  --space-0: 0px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+
+  /* --- extra ramp steps for interactive states --- */
+  --red-300: #fca5a5;
+  --red-600: #dc2626;
+  --genesis-red-deep: #9a2222;
+  --genesis-sand-deep: #f0e4c8;
+  --saturn-crimson-bright: #ff6b8a;
+
+  /* --- type scale ---
+     Named by pixel value for the same reason the spacing scale is: a token
+     name and a rendered value should be the same fact. Line heights are paired
+     to a size rather than expressed as a ratio, because the design file stores
+     them as pixels too — a ratio would have to be recomputed to compare the
+     two, and anything that needs recomputing eventually drifts. */
+  --font-size-12: 12px;
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-15: 15px;
+  --font-size-17: 17px;
+  --font-size-18: 18px;
+  --font-size-20: 20px;
+  --font-size-22: 22px;
+  --font-size-24: 24px;
+
+  --line-height-16: 16px;
+  --line-height-18: 18px;
+  --line-height-20: 20px;
+  --line-height-24: 24px;
+  --line-height-28: 28px;
+  --line-height-32: 32px;
+
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+
+  /* --- radius scale --- */
+  --radius-scale-0: 0px;
+  --radius-scale-4: 4px;
+  --radius-scale-6: 6px;
+  --radius-scale-8: 8px;
+  --radius-scale-12: 12px;
+  --radius-scale-full: 9999px;
+
+  /* --- type stacks --- */
+  --font-stack-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-stack-mono: 'Courier New', ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ============================================================================
+ * TIER 2 — SEMANTIC TOKENS
+ * What components actually consume. Every value here is an alias into a
+ * primitive — never a raw hex. Each mode block re-points the same token names
+ * at different primitives, which is why a mode switch needs no component
+ * changes anywhere in the app.
+ *
+ * Mode: LIGHT (default)
+ * ==========================================================================*/
 :root {
   color-scheme: light;
 
-  --bg: #f3f4f6;
-  --bg-alt: #f9fafb;
-  --bg-accent: #eff6ff;
-  --surface: #ffffff;
+  --bg: var(--gray-100);
+  --bg-alt: var(--gray-50);
+  --bg-accent: var(--blue-50);
+  --surface: var(--white);
 
-  --border: #e5e7eb;
-  --border-strong: #d1d5db;
-  --divider: #d1d5db;
+  --border: var(--gray-200);
+  --border-strong: var(--gray-300);
+  --divider: var(--gray-300);
 
-  --text-strong: #111827;
-  --text: #374151;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
+  --text-strong: var(--gray-900);
+  --text: var(--gray-700);
+  --text-secondary: var(--gray-500);
+  --text-muted: var(--gray-400);
 
-  --brand: #2563eb;
-  --brand-link: #3b82f6;
-  --brand-strong: #1e40af;
-  --on-brand: #ffffff;
+  --brand: var(--blue-600);
+  --brand-link: var(--blue-500);
+  --brand-strong: var(--blue-800);
+  --on-brand: var(--white);
 
-  --success: #10b981;
-  --success-bg: #ecfdf5;
-  --warning: #d97706;
-  --warning-bg: #fffbeb;
-  --danger: #ef4444;
-  --danger-bg: #fef2f2;
+  --success: var(--emerald-500);
+  --success-bg: var(--emerald-50);
+  --warning: var(--amber-600);
+  --warning-bg: var(--amber-50);
+  --danger: var(--red-500);
+  --danger-bg: var(--red-50);
+
+  /* Interactive states. Hover shifts the fill; pressed reuses the hover
+     colour plus a 1px nudge downward — the nudge is a physical affordance,
+     not a themed value, so it is deliberately not tokenised. */
+  --brand-hover: var(--blue-800);
+  --danger-hover: var(--red-600);
+  --surface-hover: var(--gray-100);
+
+  --radius-sm: var(--radius-scale-6);
+  --radius-md: var(--radius-scale-8);
+  --radius-lg: var(--radius-scale-12);
+  --radius-pill: var(--radius-scale-full);
+
+  /* Shadows are decomposed into parts rather than written as one opaque
+     string. A single --shadow-sm blob cannot be expressed as a design token in
+     Figma, but colour / offset / blur / spread each can — so this shape lets the
+     same four modes drive elevation in both places. */
+  --shadow-sm-color: var(--alpha-black-5);
+  --shadow-sm-y: var(--elevation-scale-1);
+  --shadow-sm-blur: var(--elevation-scale-2);
+  --shadow-sm-spread: var(--elevation-scale-0);
+
+  --shadow-lg-color: var(--alpha-black-12);
+  --shadow-lg-y: var(--elevation-scale-10);
+  --shadow-lg-blur: var(--elevation-scale-20);
+  --shadow-lg-spread: var(--elevation-scale-neg-4);
+
+  --shadow-sm: 0 var(--shadow-sm-y) var(--shadow-sm-blur) var(--shadow-sm-spread) var(--shadow-sm-color);
+  --shadow-lg: 0 var(--shadow-lg-y) var(--shadow-lg-blur) var(--shadow-lg-spread) var(--shadow-lg-color);
+
+  --font-sans: var(--font-stack-ui);
 }
 
+/* Mode: DARK */
 .dark {
   color-scheme: dark;
 
-  --bg: #0b1220;
-  --bg-alt: #111a2e;
-  --bg-accent: #0e1a33;
-  --surface: #1a2436;
+  --bg: var(--navy-950);
+  --bg-alt: var(--navy-850);
+  --bg-accent: var(--navy-900);
+  --surface: var(--navy-800);
 
-  --border: #2b3648;
-  --border-strong: #3b4a61;
-  --divider: #3b4a61;
+  --border: var(--navy-700);
+  --border-strong: var(--navy-600);
+  --divider: var(--navy-600);
 
-  --text-strong: #f8fafc;
-  --text: #e2e8f0;
-  --text-secondary: #a9b4c4;
-  --text-muted: #8593a6;
+  --text-strong: var(--navy-50);
+  --text: var(--navy-100);
+  --text-secondary: var(--navy-300);
+  --text-muted: var(--navy-400);
 
-  --brand: #3b82f6;
-  --brand-link: #60a5fa;
-  --brand-strong: #93c5fd;
-  --on-brand: #ffffff;
+  --brand: var(--blue-500);
+  --brand-link: var(--blue-400);
+  --brand-strong: var(--blue-300);
+  --on-brand: var(--white);
 
-  --success: #34d399;
-  --success-bg: #0d2818;
-  --warning: #fbbf24;
-  --warning-bg: #2b210a;
-  --danger: #f87171;
-  --danger-bg: #2c1414;
+  --success: var(--emerald-400);
+  --success-bg: var(--emerald-950);
+  --warning: var(--amber-400);
+  --warning-bg: var(--amber-950);
+  --danger: var(--red-400);
+  --danger-bg: var(--red-950);
+
+  --brand-hover: var(--blue-400);
+  --danger-hover: var(--red-300);
+  --surface-hover: var(--navy-700);
+
+  /* Dark surfaces need a heavier shadow to read at all. */
+  --shadow-sm-color: var(--alpha-black-40);
+  --shadow-lg-color: var(--alpha-black-50);
 }
 
-/*
- * Two extra "modes" alongside light/dark — an easter egg nod to Green Hill's
- * namesake. Same token names, so every component that already reads
- * var(--token) picks these up for free with no component changes needed.
- * 16-bit = Genesis-era Green Hill: bright, flat, hard-edged, no shadows.
- * 32-bit = Saturn/CD-era: darker, neon, a little glow and scanline haze.
- */
+/* ----------------------------------------------------------------------------
+ * Mode: 16-BIT — an easter egg nod to Green Hill's namesake.
+ * Genesis-era: bright, flat, hard-edged, no shadows. The flatness is expressed
+ * through the radius and shadow tokens rather than a global `!important`
+ * override, so components stay the single source of their own geometry.
+ * --------------------------------------------------------------------------*/
 .mode-16bit {
   color-scheme: light;
 
-  --bg: #49a8f0;
-  --bg-alt: #2f8fe0;
-  --bg-accent: #ffe066;
-  --surface: #fdf6e3;
+  --bg: var(--genesis-sky);
+  --bg-alt: var(--genesis-sky-deep);
+  --bg-accent: var(--genesis-ring-yellow);
+  --surface: var(--genesis-sand);
 
-  --border: #16324a;
-  --border-strong: #0d2233;
-  --divider: #16324a;
+  --border: var(--genesis-ink);
+  --border-strong: var(--genesis-ink-deep);
+  --divider: var(--genesis-ink);
 
-  --text-strong: #0d2233;
-  --text: #16324a;
-  --text-secondary: #2c5170;
-  --text-muted: #5b7f9c;
+  --text-strong: var(--genesis-ink-deep);
+  --text: var(--genesis-ink);
+  --text-secondary: var(--genesis-ink-soft);
+  --text-muted: var(--genesis-ink-faint);
 
-  --brand: #1c54b2;
-  --brand-link: #2563eb;
-  --brand-strong: #123a7d;
-  --on-brand: #ffffff;
+  --brand: var(--genesis-blue);
+  --brand-link: var(--blue-600);
+  --brand-strong: var(--genesis-blue-deep);
+  --on-brand: var(--white);
 
-  --success: #3aa655;
-  --success-bg: #d7f2dd;
-  --warning: #b8860b;
-  --warning-bg: #fff3c4;
-  --danger: #d32f2f;
-  --danger-bg: #fde2e0;
+  --success: var(--genesis-green);
+  --success-bg: var(--genesis-green-pale);
+  --warning: var(--genesis-gold);
+  --warning-bg: var(--genesis-gold-pale);
+  --danger: var(--genesis-red);
+  --danger-bg: var(--genesis-red-pale);
+
+  --brand-hover: var(--genesis-blue-deep);
+  --danger-hover: var(--genesis-red-deep);
+  --surface-hover: var(--genesis-sand-deep);
+
+  /* Flat and blocky — every radius collapses to zero. */
+  --radius-sm: var(--radius-scale-0);
+  --radius-md: var(--radius-scale-0);
+  --radius-lg: var(--radius-scale-0);
+  --radius-pill: var(--radius-scale-0);
+
+  /* No shadows at all — Genesis sprites sat flat on the background.
+     Expressed as a transparent colour with zero blur so the token shape stays
+     identical across modes and Figma can bind to the same four parts. */
+  --shadow-sm-color: var(--alpha-black-0);
+  --shadow-sm-y: var(--elevation-scale-0);
+  --shadow-sm-blur: var(--elevation-scale-0);
+  --shadow-sm-spread: var(--elevation-scale-0);
+
+  --shadow-lg-color: var(--alpha-black-0);
+  --shadow-lg-y: var(--elevation-scale-0);
+  --shadow-lg-blur: var(--elevation-scale-0);
+  --shadow-lg-spread: var(--elevation-scale-0);
+
+  --font-sans: var(--font-stack-mono);
 }
 
+/* ----------------------------------------------------------------------------
+ * Mode: 32-BIT — Saturn / CD era: darker, neon, small radius, a soft glow.
+ * --------------------------------------------------------------------------*/
 .mode-32bit {
   color-scheme: dark;
 
-  --bg: #1a1035;
-  --bg-alt: #241246;
-  --bg-accent: #3a1c63;
-  --surface: #2a1550;
+  --bg: var(--saturn-void);
+  --bg-alt: var(--saturn-void-lift);
+  --bg-accent: var(--saturn-violet-deep);
+  --surface: var(--saturn-violet);
 
-  --border: #6b3fa0;
-  --border-strong: #8a5cc4;
-  --divider: #6b3fa0;
+  --border: var(--saturn-violet-mid);
+  --border-strong: var(--saturn-violet-bright);
+  --divider: var(--saturn-violet-mid);
 
-  --text-strong: #f5e9ff;
-  --text: #e0c8ff;
-  --text-secondary: #b98fe0;
-  --text-muted: #8f6bb8;
+  --text-strong: var(--saturn-lavender-pale);
+  --text: var(--saturn-lavender);
+  --text-secondary: var(--saturn-lavender-mid);
+  --text-muted: var(--saturn-lavender-dim);
 
-  --brand: #ff2e88;
-  --brand-link: #ff6ec7;
-  --brand-strong: #c2166a;
-  --on-brand: #1a1035;
+  --brand: var(--saturn-magenta);
+  --brand-link: var(--saturn-pink);
+  --brand-strong: var(--saturn-magenta-deep);
+  --on-brand: var(--saturn-void);
 
-  --success: #21e6a1;
-  --success-bg: #103228;
-  --warning: #ffd23f;
-  --warning-bg: #3a2e0a;
-  --danger: #ff3860;
-  --danger-bg: #3a0f1c;
+  --success: var(--saturn-mint);
+  --success-bg: var(--saturn-mint-deep);
+  --warning: var(--saturn-gold);
+  --warning-bg: var(--saturn-gold-deep);
+  --danger: var(--saturn-crimson);
+  --danger-bg: var(--saturn-crimson-deep);
+
+  --brand-hover: var(--saturn-magenta-deep);
+  --danger-hover: var(--saturn-crimson-bright);
+  --surface-hover: var(--saturn-violet-deep);
+
+  /* Uniformly small radius — even pills square off to 4px. */
+  --radius-sm: var(--radius-scale-4);
+  --radius-md: var(--radius-scale-4);
+  --radius-lg: var(--radius-scale-4);
+  --radius-pill: var(--radius-scale-4);
+
+  /* Neon glow rather than cast shadow: no offset, coloured, generous blur. */
+  --shadow-sm-color: var(--saturn-magenta-25);
+  --shadow-sm-y: var(--elevation-scale-0);
+  --shadow-sm-blur: var(--elevation-scale-6);
+  --shadow-sm-spread: var(--elevation-scale-0);
+
+  --shadow-lg-color: var(--saturn-magenta-35);
+  --shadow-lg-y: var(--elevation-scale-0);
+  --shadow-lg-blur: var(--elevation-scale-18);
+  --shadow-lg-spread: var(--elevation-scale-0);
+
+  --font-sans: var(--font-stack-mono);
 }
 
-/* Retro typography — a monospace stack stands in for a pixel font. Swapping
-   in a self-hosted pixel face (e.g. Press Start 2P) later is a drop-in change
-   here; this build has no network access to fetch a webfont. */
+/* Retro typography — a monospace stack stands in for a pixel font. Swapping in
+   a self-hosted pixel face (e.g. Press Start 2P) later means re-pointing
+   --font-stack-mono; nothing else changes. */
 html.mode-16bit body,
 html.mode-32bit body {
-  font-family: 'Courier New', ui-monospace, SFMono-Regular, monospace;
   letter-spacing: 0.02em;
 }
 
-/* 16-bit: flat and blocky, no rounded corners or shadows. */
-html.mode-16bit * {
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-/* 32-bit: a little more polish — small radius, a soft glow on brand color. */
-html.mode-32bit * {
-  border-radius: 4px !important;
-}
+/* 32-bit only: text glow on interactive elements. Decorative, not tokenised —
+   it applies to a specific element class rather than expressing a design
+   decision that any component would need to read. */
 html.mode-32bit button,
 html.mode-32bit a {
   text-shadow: 0 0 6px currentColor;
@@ -190,13 +464,14 @@ body {
   margin: 0;
   background-color: var(--bg);
   color: var(--text);
+  font-family: var(--font-sans);
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* Ease the transition when the theme flips. */
+/* Ease the transition when the mode flips. */
 body,
 header,
 main,

@@ -1,22 +1,20 @@
 /**
- * Text input with label, help text, and an error state.
+ * Select with label, help text, and an error state.
  *
- * The prop is `label`, matching the HTML element it renders and the convention
- * every other form control in this app follows. Error state is a prop, not a
- * CSS-only concern, because a screen needs to *know* a field is invalid in
- * order to describe it to assistive tech — `aria-invalid` and
- * `aria-describedby` are wired from it here.
+ * Extracted from SettingsScreen (data region) and TeamMembersScreen (invite
+ * role), which had been hand-rolling the same <select> with an identical class
+ * string. The prop API deliberately mirrors InputField, so the two form
+ * controls are interchangeable from a screen's point of view.
  *
- * Focus is deliberately NOT a prop: it is a browser state, handled by the
- * `focus:` pseudo-class below.
+ * Renders a native <select>: keyboard behaviour, mobile pickers, and screen
+ * reader support all come free, and none of them are worth reimplementing.
  */
-export function InputField({
+export function Select({
   label,
   id,
   value,
   onChange,
-  placeholder,
-  type = 'text',
+  options = [],
   disabled = false,
   required = false,
   error,
@@ -34,12 +32,10 @@ export function InputField({
           </span>
         )}
       </label>
-      <input
+      <select
         id={id}
-        type={type}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
         disabled={disabled}
         required={required}
         aria-invalid={error ? true : undefined}
@@ -49,7 +45,13 @@ export function InputField({
           borderColor: error ? 'var(--danger)' : 'var(--border-strong)',
           '--tw-ring-color': error ? 'var(--danger)' : 'var(--brand-link)',
         }}
-      />
+      >
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
       {error ? (
         <p id={`${id}-error`} className="m-0 mt-1.5 text-12 font-medium text-[var(--danger)]">
           {error}

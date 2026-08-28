@@ -13,7 +13,7 @@ export function StatusBadge({ tone = 'neutral', children }) {
 
   return (
     <span
-      className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold"
+      className="inline-flex items-center rounded-full px-2.5 py-1 text-12 font-semibold"
       style={{ backgroundColor: bg, color: fg }}
     >
       {children}

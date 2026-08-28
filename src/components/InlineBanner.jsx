@@ -18,8 +18,8 @@ export function InlineBanner({ tone = 'info', title, description, action }) {
       style={{ backgroundColor: bg, borderLeftColor: border, color: fg }}
     >
       <div>
-        <p className="m-0 text-sm font-semibold">{title}</p>
-        {description && <p className="m-0 mt-1 text-sm text-[var(--text-secondary)]">{description}</p>}
+        <p className="m-0 text-14 font-semibold">{title}</p>
+        {description && <p className="m-0 mt-1 text-14 text-[var(--text-secondary)]">{description}</p>}
       </div>
       {action}
     </div>

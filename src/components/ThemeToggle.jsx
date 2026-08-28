@@ -1,4 +1,4 @@
-import { useTheme } from '../useTheme.js'
+import { useTheme } from '@/useTheme.js'
 
 const NEXT_LABEL = {
   light: 'Switch to dark mode',
@@ -24,7 +24,7 @@ export default function ThemeToggle() {
       onClick={cycleMode}
       aria-label={NEXT_LABEL[mode]}
       title={NEXT_LABEL[mode]}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[15px] text-[var(--text-secondary)] hover:text-[var(--brand-link)]"
+      className="flex h-[36px] w-[36px] items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-15 text-[var(--text-secondary)] hover:text-[var(--brand-link)]"
     >
       {ICON[mode]}
     </button>

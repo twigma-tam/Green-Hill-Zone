@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import NavBar from '../components/NavBar.jsx'
-import BigButton from '../components/BigButton.jsx'
-import { EmptyState } from '../components/EmptyState.jsx'
+import NavBar from '@/components/NavBar.jsx'
+import BigButton from '@/components/BigButton.jsx'
+import { EmptyState } from '@/components/EmptyState.jsx'
 
 export default function ReportsScreen() {
   const navigate = useNavigate()

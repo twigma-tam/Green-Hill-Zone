@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
-import NavBar from '../components/NavBar.jsx'
-import { CardThing } from '../components/CardThing.jsx'
-import BigButton from '../components/BigButton.jsx'
-import { InlineBanner } from '../components/InlineBanner.jsx'
+import NavBar from '@/components/NavBar.jsx'
+import { CardThing } from '@/components/CardThing.jsx'
+import BigButton from '@/components/BigButton.jsx'
+import { InlineBanner } from '@/components/InlineBanner.jsx'
 
 export default function IntegrationsPage() {
   const navigate = useNavigate()
@@ -11,8 +11,8 @@ export default function IntegrationsPage() {
     <div className="min-h-screen bg-[var(--bg-accent)]">
       <NavBar />
       <div className="mx-auto max-w-4xl px-6 py-8">
-        <h1 className="mb-2 text-[22px] font-bold text-[var(--brand-strong)]">Integrations & webhooks</h1>
-        <p className="mb-6 text-sm text-[var(--text-secondary)]">
+        <h1 className="mb-2 text-22 font-bold text-[var(--brand-strong)]">Integrations & webhooks</h1>
+        <p className="mb-6 text-14 text-[var(--text-secondary)]">
           Connect tools, then pipe metrics into reports or billing alerts.
         </p>
 
@@ -42,7 +42,7 @@ export default function IntegrationsPage() {
           </BigButton>
         </div>
 
-        <p className="mt-4 text-xs text-[var(--text-muted)]">
+        <p className="mt-4 text-12 text-[var(--text-muted)]">
           API tokens live in{' '}
           <Link to="/settings" className="text-[var(--brand)] no-underline hover:underline">
             workspace settings

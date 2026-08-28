@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "@figma/code-connect/figma-types"
+    ],
+    "checkJs": false,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*",
+    "*.config.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Dashboard from './pages/Dashboard.jsx'
-import SettingsScreen from './pages/SettingsScreen.jsx'
-import ReportsScreen from './pages/ReportsScreen.jsx'
-import BillingInvoices from './pages/BillingInvoices.jsx'
-import BillingAgingReport from './pages/BillingAgingReport.jsx'
-import TeamMembersScreen from './pages/TeamMembersScreen.jsx'
-import IntegrationsPage from './pages/IntegrationsPage.jsx'
+import Dashboard from '@/pages/Dashboard.jsx'
+import SettingsScreen from '@/pages/SettingsScreen.jsx'
+import ReportsScreen from '@/pages/ReportsScreen.jsx'
+import BillingInvoices from '@/pages/BillingInvoices.jsx'
+import BillingAgingReport from '@/pages/BillingAgingReport.jsx'
+import TeamMembersScreen from '@/pages/TeamMembersScreen.jsx'
+import IntegrationsPage from '@/pages/IntegrationsPage.jsx'
 
 export default function App() {
   return (

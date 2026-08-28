@@ -1,26 +1,40 @@
 /** Primary actions across the app. Variants are centralized here — screens
  *  choose a variant and, optionally, size; they don't override colors or
- *  spacing directly, so the button stays consistent everywhere it's used. */
+ *  spacing directly, so the button stays consistent everywhere it's used.
+ *
+ *  Interactive states are expressed as CSS custom properties set inline and
+ *  consumed by `hover:` / `active:` utilities. Doing it this way keeps the
+ *  variant table as the single source of colour truth while still getting real
+ *  pseudo-class behaviour — an inline style object alone cannot do :hover.
+ *
+ *  Pressed reuses the hover fill plus a 1px downward nudge. The nudge is a
+ *  physical affordance rather than a themed value, so it stays untokenised.
+ */
 
 const VARIANTS = {
   primary: {
-    backgroundColor: 'var(--brand)',
-    color: 'var(--on-brand)',
+    '--btn-bg': 'var(--brand)',
+    '--btn-bg-hover': 'var(--brand-hover)',
+    '--btn-fg': 'var(--on-brand)',
+    '--btn-border': 'transparent',
   },
   ghost: {
-    backgroundColor: 'transparent',
-    color: 'var(--brand-link)',
-    border: '1px solid var(--brand-link)',
+    '--btn-bg': 'transparent',
+    '--btn-bg-hover': 'var(--surface-hover)',
+    '--btn-fg': 'var(--brand-link)',
+    '--btn-border': 'var(--brand-link)',
   },
   danger: {
-    backgroundColor: 'var(--danger)',
-    color: 'var(--on-brand)',
+    '--btn-bg': 'var(--danger)',
+    '--btn-bg-hover': 'var(--danger-hover)',
+    '--btn-fg': 'var(--on-brand)',
+    '--btn-border': 'transparent',
   },
 }
 
 const SIZES = {
-  md: { padding: '8px 16px', fontSize: 14 },
-  sm: { padding: '6px 12px', fontSize: 13 },
+  md: 'px-4 py-2 text-14',
+  sm: 'px-3 py-1.5 text-13',
 }
 
 export default function BigButton({
@@ -31,14 +45,9 @@ export default function BigButton({
   disabled = false,
   onClick,
 }) {
-  const base = {
-    borderRadius: 8,
-    fontWeight: 600,
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    border: 'none',
-    fontFamily: 'system-ui, sans-serif',
-    opacity: disabled ? 0.5 : 1,
-  }
+  const interactive = disabled
+    ? 'cursor-not-allowed opacity-50'
+    : 'cursor-pointer hover:bg-[var(--btn-bg-hover)] active:bg-[var(--btn-bg-hover)] active:translate-y-px'
 
   return (
     <button
@@ -46,7 +55,8 @@ export default function BigButton({
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       aria-disabled={disabled}
-      style={{ ...base, ...SIZES[size], ...VARIANTS[variant] }}
+      className={`rounded-lg border font-semibold transition-colors ${SIZES[size]} ${interactive} bg-[var(--btn-bg)] text-[var(--btn-fg)] border-[var(--btn-border)]`}
+      style={{ ...VARIANTS[variant], fontFamily: 'var(--font-sans)' }}
     >
       {children}
     </button>
