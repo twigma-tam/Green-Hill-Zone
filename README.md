@@ -41,6 +41,7 @@ spotting and fixing code issues). All five documented issues from that
 exercise have been fixed here, several missing UI states have been added,
 and this repo is otherwise fully independent going forward — it is not
 synced with or dependent on the original training repo.
+Also note that the overall structure of the Simple Design System repo where reused to achieve best practices around flexible URL usage & copying of files.
 
 ## Stack
 
