@@ -31,6 +31,29 @@ npm run figma:publish
 Verify with `npm run figma:parse` first — it type-checks every template
 without publishing.
 
+
+## Syntax highlighting in Dev Mode
+
+Parserless templates (`.figma.ts` exporting `figma.code`) default to label
+`Code`, and `Code` infers the language `plaintext` — so every published snippet
+renders unhighlighted in Dev Mode, no matter that it is JSX. Two keys in
+`figma.config.json` fix it:
+
+```json
+"label": "React",
+"language": "jsx"
+```
+
+`label` is what Dev Mode shows above the snippet and groups mappings by;
+`language` is the syntax highlighter. `language` overrides whatever the label
+would have inferred, so set it explicitly rather than relying on the label.
+Valid values are the ones Code Connect ships (`jsx`, `tsx`, `typescript`,
+`javascript`, `swift`, `kotlin`, `html`, `css`, `dart`, `plaintext`, …) — an
+unrecognised value fails the publish with a listed set of alternatives.
+
+Verify with `npm run figma:parse`: every entry should report
+`"label": "React"` and `"language": "jsx"`.
+
 ## documentUrlSubstitutions
 
 This repo uses the same pattern as Figma's [Simple Design System
@@ -78,6 +101,12 @@ to the identical component). So:
 | `TableV2 / Header Cell.Sort` | `headers` entry shape | `off` → plain string; others → `{ label, key }` |
 | `NavItem.Active` | `active` | real prop; NavBar derives it from `useLocation()` |
 | `ThemeToggle.Mode` | — | no prop; the component reads `useTheme()` itself |
+| `PageHeader.Has Icon` | `icon` | BOOLEAN gating an INSTANCE_SWAP slot |
+| `PageHeader.Icon` | `icon` | INSTANCE_SWAP; preferred values are the 6 Icon glyphs |
+| `PageHeader.Has Badge` | `badge` | BOOLEAN; tone lives on the nested StatusBadge |
+| `PageHeader.Actions` | `actions` | real SLOT — arbitrary content, read with `getSlot()` |
+| `SettingRow` nested `ToggleSwitch` | `checked` / `disabled` | EXPOSED nested instance; the switch's own props surface on the row |
+| `Icon.Name` | `name` | one axis, one glyph — never a variant per icon |
 
 Every VARIANT is mapped **exhaustively**. An unmapped variant value silently
 returns `undefined` and emits a broken snippet — that is the single most common

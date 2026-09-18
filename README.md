@@ -73,6 +73,12 @@ your project](https://developers.figma.com/docs/code-connect/api/config-file/).
 | `TableV2 / Header Cell.Sort` | `headers` entry shape | `off` → plain string; others → `{ label, key }` |
 | `NavItem.Active` | `active` | real prop; NavBar derives it from `useLocation()` |
 | `ThemeToggle.Mode` | — | no prop; the component reads `useTheme()` itself |
+| `PageHeader.Has Icon` | `icon` | BOOLEAN gating an INSTANCE_SWAP slot |
+| `PageHeader.Icon` | `icon` | INSTANCE_SWAP; preferred values are the 6 Icon glyphs |
+| `PageHeader.Has Badge` | `badge` | BOOLEAN; tone lives on the nested StatusBadge |
+| `PageHeader.Actions` | `actions` | real SLOT — arbitrary content, read with `getSlot()` |
+| `SettingRow` nested `ToggleSwitch` | `checked` / `disabled` | EXPOSED nested instance; the switch's own props surface on the row |
+| `Icon.Name` | `name` | one axis, one glyph — never a variant per icon |
 
 Every VARIANT is mapped **exhaustively**. An unmapped variant value silently
 returns `undefined` and emits a broken snippet — that is the single most common
@@ -131,10 +137,22 @@ that alias them — across four modes: light, dark, 16-bit and 32-bit
 
 ## Components
 
-`BigButton`, `CardThing`, `InputField`, `Select`, `NavBar`, `TableV2`, `ThemeToggle`,
-`ToggleSwitch`, plus `StatusBadge`, `InlineBanner`, `EmptyState`, and `Modal`
-— covering the states an enterprise ops screen actually needs: success/
-warning/danger status, inline errors, empty data, and confirm/form dialogs.
+**Atoms** — `BigButton`, `Icon`, `InputField`, `Select`, `StatusBadge`,
+`ThemeToggle`, `ToggleSwitch`
+
+**Compositions** (components that contain other components) — `PageHeader`
+(Icon + StatusBadge + a BigButton slot), `SettingRow` (an exposed nested
+ToggleSwitch), `InlineBanner` and `EmptyState` and `Modal` (nested BigButtons),
+`TableV2` (Header Cell / Row / Cell, with StatusBadge in badge cells), `NavBar`
+(NavItem + ThemeToggle)
+
+**Plus** — `CardThing`
+
+Between them they cover the states an enterprise ops screen actually needs —
+success/warning/danger status, inline errors, empty data, confirm/form dialogs
+— and, deliberately, one example of each Figma component capability: variants,
+text properties, booleans, instance-swap, slots, and exposed nested instances.
+See `src/figma/README.md` for which component demonstrates which.
 
 ## Getting started
 

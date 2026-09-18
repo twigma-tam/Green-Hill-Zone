@@ -4,6 +4,8 @@ import NavBar from '@/components/NavBar.jsx'
 import { CardThing } from '@/components/CardThing.jsx'
 import { TableV2 } from '@/components/TableV2.jsx'
 import { StatusBadge } from '@/components/StatusBadge.jsx'
+import { PageHeader } from '@/components/PageHeader.jsx'
+import { Icon } from '@/components/Icon.jsx'
 import styles from './Dashboard.module.css'
 
 const STATUS_TONE = { Active: 'success', 'At risk': 'warning' }
@@ -55,8 +57,12 @@ export default function Dashboard() {
     <div className={styles.pageWrap}>
       <NavBar />
       <main className={styles.mainArea}>
-        <h1 className={styles.sectionTitle}>Overview</h1>
-        <p className="mt-2 text-14 text-[var(--text-secondary)]">Last updated 2 minutes ago · internal only</p>
+        <PageHeader
+          icon={<Icon name="refresh" />}
+          title="Overview"
+          description="Last updated 2 minutes ago"
+          badge={<StatusBadge tone="neutral">Internal only</StatusBadge>}
+        />
 
         <div className="mt-4 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 text-14 text-[var(--text-secondary)]">
           <span className="font-semibold text-[var(--text)]">Other flows:</span>{' '}

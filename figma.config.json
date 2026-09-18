@@ -1,6 +1,8 @@
 {
   "codeConnect": {
     "parser": "react",
+    "label": "React",
+    "language": "jsx",
     "include": ["src/figma/**/*.figma.ts"],
     "exclude": ["node_modules/**", "dist/**"],
     "paths": {
@@ -12,6 +14,9 @@
     "documentUrlSubstitutions": {
       "<FIGMA_BIG_BUTTON>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=23-50",
       "<FIGMA_CARD_THING>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=2-794",
+      "<FIGMA_ICON>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=99-22",
+      "<FIGMA_PAGE_HEADER>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=102-20",
+      "<FIGMA_SETTING_ROW>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=102-136",
       "<FIGMA_EMPTY_STATE>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=4-26",
       "<FIGMA_INLINE_BANNER>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=2-831",
       "<FIGMA_INPUT_FIELD>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=2-786",
