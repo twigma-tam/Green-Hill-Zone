@@ -12,12 +12,16 @@
  *  PageHeader growing a prop for each case. It mirrors how the Figma component
  *  exposes these as instance-swap slots with preferred values instead of as
  *  extra variant axes.
+ *
+ *  The title row wraps. On a narrow viewport a long title plus a badge exceeds
+ *  the available width, and without wrapping the badge is what gets clipped —
+ *  which is the one part of the row carrying new information.
  */
 export function PageHeader({ title, description, icon, badge, actions }) {
   return (
     <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
       <div className="min-w-0">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {icon && <span className="text-[var(--brand)]">{icon}</span>}
           <h1 className="m-0 text-24 font-semibold text-[var(--text)]">{title}</h1>
           {badge}
