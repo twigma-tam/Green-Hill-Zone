@@ -78,6 +78,7 @@ your project](https://developers.figma.com/docs/code-connect/api/config-file/).
 | `PageHeader.Has Badge` | `badge` | BOOLEAN; tone lives on the nested StatusBadge |
 | `PageHeader.Actions` | `actions` | real SLOT — arbitrary content, read with `getSlot()` |
 | `SettingRow` nested `ToggleSwitch` | `checked` / `disabled` | EXPOSED nested instance; the switch's own props surface on the row |
+| `SettingRow.Control` | `control` | SLOT; default content is the exposed `ToggleSwitch` — untouched it's a boolean row |
 | `Icon.Name` | `name` | one axis, one glyph — never a variant per icon |
 | `BigButton.Has Icon` / `.Icon` | `icon` | BOOLEAN + INSTANCE_SWAP; renders at 16px, inherits label colour |
 | `Avatar.Has Image` | `src` | `true` emits `src`; `false` falls back to initials derived from `name` |
@@ -168,7 +169,7 @@ exactly one reference example, so there is always a specific place to point at.
 | TEXT property | `CardThing.Title`, `InputField.Label` |
 | BOOLEAN property | `InlineBanner.Has Action`, `InputField.Required` |
 | INSTANCE_SWAP + preferred values | `PageHeader.Icon`, `BigButton.Icon` |
-| SLOT (+ max children, preferred-only) | `PageHeader.Actions` |
+| SLOT (+ max children, preferred-only) | `PageHeader.Actions` (empty by default), `SettingRow.Control` (default content) |
 | Nested instances | `Modal`, `EmptyState`, `TableV2`, `NavBar` |
 | Exposed nested instance properties | `SettingRow` (its `ToggleSwitch`) |
 | Image fill + circular crop | `Avatar` (Has Image=true) |

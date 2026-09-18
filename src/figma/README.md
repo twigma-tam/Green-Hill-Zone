@@ -143,6 +143,7 @@ to the identical component). So:
 | `PageHeader.Has Badge` | `badge` | BOOLEAN; tone lives on the nested StatusBadge |
 | `PageHeader.Actions` | `actions` | real SLOT — arbitrary content, read with `getSlot()` |
 | `SettingRow` nested `ToggleSwitch` | `checked` / `disabled` | EXPOSED nested instance; the switch's own props surface on the row |
+| `SettingRow.Control` | `control` | SLOT; default content is the exposed `ToggleSwitch` — untouched it's a boolean row |
 | `Icon.Name` | `name` | one axis, one glyph — never a variant per icon |
 | `BigButton.Has Icon` / `.Icon` | `icon` | BOOLEAN + INSTANCE_SWAP; renders at 16px, inherits label colour |
 | `Avatar.Has Image` | `src` | `true` emits `src`; `false` falls back to initials derived from `name` |
