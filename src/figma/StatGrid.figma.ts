@@ -4,7 +4,10 @@
 import figma from 'figma'
 const instance = figma.selectedInstance
 
-const columns = instance.getEnum('Columns', { 2: '2', 3: '3', 4: '4' })
+// EXHAUSTIVE: Columns=1 was added to the component after this template was
+// first written, and an unmapped variant silently returns undefined — which
+// would have emitted `columns={undefined}`. Every axis value gets a mapping.
+const columns = instance.getEnum('Columns', { 1: '1', 2: '2', 3: '3', 4: '4' })
 
 // The cards are real nested instances, so resolve each one through its own
 // template rather than hardcoding CardThing calls. There is no `.map().join()`
