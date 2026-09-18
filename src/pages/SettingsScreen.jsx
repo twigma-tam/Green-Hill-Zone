@@ -5,6 +5,7 @@ import { Select } from '@/components/Select.jsx'
 import BigButton from '@/components/BigButton.jsx'
 import { PageHeader } from '@/components/PageHeader.jsx'
 import { SettingRow } from '@/components/SettingRow.jsx'
+import { Icon } from '@/components/Icon.jsx'
 
 export default function SettingsScreen() {
   const [workspaceName, setWorkspaceName] = useState('Green Hill Ops')
@@ -57,7 +58,7 @@ export default function SettingsScreen() {
               title="Export workspace data"
               description="Downloads a JSON archive of this environment."
               control={
-                <BigButton variant="ghost" size="sm">
+                <BigButton variant="ghost" size="sm" icon={<Icon name="download" size={16} />}>
                   Export
                 </BigButton>
               }

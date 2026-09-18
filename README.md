@@ -79,6 +79,11 @@ your project](https://developers.figma.com/docs/code-connect/api/config-file/).
 | `PageHeader.Actions` | `actions` | real SLOT — arbitrary content, read with `getSlot()` |
 | `SettingRow` nested `ToggleSwitch` | `checked` / `disabled` | EXPOSED nested instance; the switch's own props surface on the row |
 | `Icon.Name` | `name` | one axis, one glyph — never a variant per icon |
+| `BigButton.Has Icon` / `.Icon` | `icon` | BOOLEAN + INSTANCE_SWAP; renders at 16px, inherits label colour |
+| `Avatar.Has Image` | `src` | `true` emits `src`; `false` falls back to initials derived from `name` |
+| `Avatar.Size` | `size` | 24 / 32 / 40 px ramp, not a spacing token |
+| `Avatar.Initials` | — | code derives initials from `name`; the property exists only because Figma can't |
+| `StatGrid.Columns` | `columns` | GRID auto-layout; children carry `minWidth: 180` |
 
 Every VARIANT is mapped **exhaustively**. An unmapped variant value silently
 returns `undefined` and emits a broken snippet — that is the single most common
@@ -137,22 +142,46 @@ that alias them — across four modes: light, dark, 16-bit and 32-bit
 
 ## Components
 
-**Atoms** — `BigButton`, `Icon`, `InputField`, `Select`, `StatusBadge`,
-`ThemeToggle`, `ToggleSwitch`
+**Atoms** — `Avatar`, `BigButton`, `Icon`, `InputField`, `Select`,
+`StatusBadge`, `ThemeToggle`, `ToggleSwitch`
 
 **Compositions** (components that contain other components) — `PageHeader`
 (Icon + StatusBadge + a BigButton slot), `SettingRow` (an exposed nested
-ToggleSwitch), `InlineBanner` and `EmptyState` and `Modal` (nested BigButtons),
-`TableV2` (Header Cell / Row / Cell, with StatusBadge in badge cells), `NavBar`
-(NavItem + ThemeToggle)
+ToggleSwitch), `StatGrid` (CardThings in a grid), `InlineBanner` /
+`EmptyState` / `Modal` (nested BigButtons), `TableV2` (Header Cell / Row /
+Cell, with StatusBadge in badge cells), `NavBar` (NavItem + ThemeToggle)
 
 **Plus** — `CardThing`
 
 Between them they cover the states an enterprise ops screen actually needs —
-success/warning/danger status, inline errors, empty data, confirm/form dialogs
-— and, deliberately, one example of each Figma component capability: variants,
-text properties, booleans, instance-swap, slots, and exposed nested instances.
-See `src/figma/README.md` for which component demonstrates which.
+success/warning/danger status, inline errors, empty data, confirm/form dialogs.
+
+### Capability coverage
+
+The component set is also a checklist: every Figma component capability has
+exactly one reference example, so there is always a specific place to point at.
+
+| Capability | Reference example |
+|---|---|
+| VARIANT, single axis | `StatusBadge.Tone`, `Icon.Name` |
+| VARIANT, multi-axis matrix | `BigButton` (3 x 2 x 4 = 24), `InputField` (4 x 2) |
+| TEXT property | `CardThing.Title`, `InputField.Label` |
+| BOOLEAN property | `InlineBanner.Has Action`, `InputField.Required` |
+| INSTANCE_SWAP + preferred values | `PageHeader.Icon`, `BigButton.Icon` |
+| SLOT (+ max children, preferred-only) | `PageHeader.Actions` |
+| Nested instances | `Modal`, `EmptyState`, `TableV2`, `NavBar` |
+| Exposed nested instance properties | `SettingRow` (its `ToggleSwitch`) |
+| Image fill + circular crop | `Avatar` (Has Image=true) |
+| GRID auto-layout + min width | `StatGrid` |
+| Text truncation / max lines | `CardThing.Title` (1), `PageHeader.Description` (2) |
+| Interactive component (prototype) | `BigButton` (hover/press), `ToggleSwitch` (click) |
+| Dev Mode annotations | the six layers listed in `src/figma/README.md` |
+| Multiple code mappings per component | `BigButton`, `StatusBadge`, `Icon` (React + HTML) |
+| Multi-mode variables | `Semantic` collection, 4 modes |
+
+Two capabilities are deliberately absent: Code Connect's `links` field (not
+available to parserless templates — annotations are used instead) and
+platform ports beyond web (see `ROADMAP.md`).
 
 ## Getting started
 

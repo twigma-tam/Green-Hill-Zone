@@ -23,7 +23,9 @@ export function PageHeader({ title, description, icon, badge, actions }) {
           {badge}
         </div>
         {description && (
-          <p className="mb-0 mt-2 text-14 text-[var(--text-secondary)]">{description}</p>
+          <p className="mb-0 mt-2 line-clamp-2 text-14 text-[var(--text-secondary)]">
+            {description}
+          </p>
         )}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-3">{actions}</div>}

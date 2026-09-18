@@ -26,7 +26,12 @@ export default function IntegrationsPage() {
           title="Segment needs a new API key"
           description="The last sync failed 40 minutes ago. Reconnect it from workspace settings to resume."
           action={
-            <BigButton variant="ghost" size="sm" onClick={() => navigate('/settings')}>
+            <BigButton
+              variant="ghost"
+              size="sm"
+              icon={<Icon name="external" size={16} />}
+              onClick={() => navigate('/settings')}
+            >
               Go to settings
             </BigButton>
           }

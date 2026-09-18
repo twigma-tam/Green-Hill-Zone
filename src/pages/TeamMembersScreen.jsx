@@ -7,11 +7,15 @@ import { Select } from '@/components/Select.jsx'
 import { Modal } from '@/components/Modal.jsx'
 import { StatusBadge } from '@/components/StatusBadge.jsx'
 import { PageHeader } from '@/components/PageHeader.jsx'
+import { Avatar } from '@/components/Avatar.jsx'
+import { Icon } from '@/components/Icon.jsx'
 
+// Only some people have a photo — that's the point. Avatar falls back to
+// initials, which is the common case in a real directory, not an error case.
 const people = [
-  { id: '1', name: 'Alex Rivera', role: 'Admin' },
+  { id: '1', name: 'Alex Rivera', role: 'Admin', photo: 'https://i.pravatar.cc/80?img=12' },
   { id: '2', name: 'Jordan Lee', role: 'Editor' },
-  { id: '3', name: 'Sam Patel', role: 'Viewer' },
+  { id: '3', name: 'Sam Patel', role: 'Viewer', photo: 'https://i.pravatar.cc/80?img=32' },
   { id: '4', name: 'Riley Chen', role: 'Editor' },
 ]
 
@@ -36,7 +40,12 @@ export default function TeamMembersScreen() {
           description="Invite members, then wire billing and integrations from the header nav."
           badge={<StatusBadge tone="neutral">{people.length} members</StatusBadge>}
           actions={
-            <BigButton variant="ghost" size="sm" onClick={() => setInviteOpen(true)}>
+            <BigButton
+              variant="ghost"
+              size="sm"
+              icon={<Icon name="plus" size={16} />}
+              onClick={() => setInviteOpen(true)}
+            >
               Invite user
             </BigButton>
           }
@@ -48,7 +57,10 @@ export default function TeamMembersScreen() {
               key={p.id}
               className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3 text-14"
             >
-              <span className="font-semibold text-[var(--text)]">{p.name}</span>
+              <span className="flex items-center gap-3">
+                <Avatar name={p.name} src={p.photo} size="md" />
+                <span className="font-semibold text-[var(--text)]">{p.name}</span>
+              </span>
               <span className="text-[var(--text-secondary)]">{p.role}</span>
             </li>
           ))}

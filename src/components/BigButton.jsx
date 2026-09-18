@@ -9,6 +9,13 @@
  *
  *  Pressed reuses the hover fill plus a 1px downward nudge. The nudge is a
  *  physical affordance rather than a themed value, so it stays untokenised.
+ *
+ *  `icon` is a slot, not a name. Passing `<Icon name="download" />` keeps the
+ *  glyph list in one place (the Icon component) instead of duplicating it as a
+ *  union type here, and it means the button never has to know how an icon is
+ *  rendered. The Figma twin exposes the same thing as an INSTANCE_SWAP
+ *  property whose preferred values are the Icon glyphs. The icon leads the
+ *  label because it is a qualifier for the action, not a decoration after it.
  */
 
 const VARIANTS = {
@@ -44,6 +51,7 @@ export default function BigButton({
   type = 'button',
   disabled = false,
   onClick,
+  icon,
 }) {
   const interactive = disabled
     ? 'cursor-not-allowed opacity-50'
@@ -55,9 +63,10 @@ export default function BigButton({
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       aria-disabled={disabled}
-      className={`rounded-lg border font-semibold transition-colors ${SIZES[size]} ${interactive} bg-[var(--btn-bg)] text-[var(--btn-fg)] border-[var(--btn-border)]`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg border font-semibold transition-colors ${SIZES[size]} ${interactive} bg-[var(--btn-bg)] text-[var(--btn-fg)] border-[var(--btn-border)]`}
       style={{ ...VARIANTS[variant], fontFamily: 'var(--font-sans)' }}
     >
+      {icon}
       {children}
     </button>
   )

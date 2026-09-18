@@ -23,5 +23,7 @@ export default {
   example: figma.code`<Icon name="${name}" />`,
   imports: ["import { Icon } from '@/components/Icon.jsx'"],
   id: 'icon',
-  metadata: { nestable: true },
+  // `props` surfaces the glyph name to parent templates without them having to
+  // parse the snippet. BigButton's HTML mapping needs the bare name, not JSX.
+  metadata: { nestable: true, props: { name } },
 }

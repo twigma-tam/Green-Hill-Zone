@@ -12,7 +12,9 @@
       "src/components/*": "@/components"
     },
     "documentUrlSubstitutions": {
+      "<FIGMA_AVATAR>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=107-12",
       "<FIGMA_BIG_BUTTON>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=23-50",
+      "<FIGMA_STAT_GRID>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=107-175",
       "<FIGMA_CARD_THING>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=2-794",
       "<FIGMA_ICON>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=99-22",
       "<FIGMA_PAGE_HEADER>": "https://www.figma.com/design/MZEnA8pImq1ffqpPgQCzCZ?node-id=102-20",

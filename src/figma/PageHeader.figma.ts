@@ -34,6 +34,14 @@ if (badge && badge.type === 'INSTANCE') {
 // `actions` is a real SLOT, so its contents are arbitrary — one button, two, or
 // nothing. getSlot returns the rendered sections for whatever is in there;
 // there is no instance to executeTemplate() on.
+//
+// Expect the Dev Mode output to look like `actions={<Actions_1 />}` plus a
+// generated `Actions_1` function below the snippet. That is how Figma renders
+// slot content — it preserves the slot's own layout frame rather than
+// flattening it — and it is the visible difference between a SLOT and an
+// INSTANCE_SWAP. Resolving the buttons by hand with findConnectedInstances
+// (the way Modal.figma.ts does) would give a flatter snippet but would stop
+// demonstrating the slot.
 const actions = instance.getSlot('Actions')
 
 export default {

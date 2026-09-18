@@ -6,6 +6,7 @@ import { StatusBadge } from '@/components/StatusBadge.jsx'
 import BigButton from '@/components/BigButton.jsx'
 import { Modal } from '@/components/Modal.jsx'
 import { PageHeader } from '@/components/PageHeader.jsx'
+import { Icon } from '@/components/Icon.jsx'
 
 const STATUS_TONE = { Paid: 'success', Overdue: 'danger' }
 
@@ -44,7 +45,12 @@ export default function BillingInvoices() {
           description="Finance flow — split charges by team or push totals to your ERP."
           badge={<StatusBadge tone="danger">1 overdue</StatusBadge>}
           actions={
-            <BigButton variant="primary" size="sm" onClick={() => setConfirmOpen(true)}>
+            <BigButton
+              variant="primary"
+              size="sm"
+              icon={<Icon name="check" size={16} />}
+              onClick={() => setConfirmOpen(true)}
+            >
               Record payment
             </BigButton>
           }
