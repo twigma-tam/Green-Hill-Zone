@@ -28,8 +28,18 @@ const disabled = instance.getEnum('State', {
   disabled: true,
 })
 
+// Optional leading icon. `Icon` is an INSTANCE_SWAP property, so read it with
+// getInstanceSwap rather than by layer name — the layer name changes when the
+// glyph is swapped, the property does not. `Has Icon` gates it.
+const hasIcon = instance.getBoolean('Has Icon')
+const icon = hasIcon ? instance.getInstanceSwap('Icon') : null
+let iconCode
+if (icon && icon.type === 'INSTANCE') {
+  iconCode = icon.executeTemplate().example
+}
+
 export default {
-  example: figma.code`<BigButton variant="${variant}" size="${size}"${disabled ? ' disabled' : ''}>${label}</BigButton>`,
+  example: figma.code`<BigButton variant="${variant}" size="${size}"${disabled ? ' disabled' : ''}${iconCode ? figma.code` icon={${iconCode}}` : ''}>${label}</BigButton>`,
   imports: ["import BigButton from '@/components/BigButton.jsx'"],
   id: 'big-button',
   metadata: { nestable: true },

@@ -5,11 +5,17 @@ import BigButton from '@/components/BigButton.jsx'
 import { InputField } from '@/components/InputField.jsx'
 import { Select } from '@/components/Select.jsx'
 import { Modal } from '@/components/Modal.jsx'
+import { StatusBadge } from '@/components/StatusBadge.jsx'
+import { PageHeader } from '@/components/PageHeader.jsx'
+import { Avatar } from '@/components/Avatar.jsx'
+import { Icon } from '@/components/Icon.jsx'
 
+// Only some people have a photo — that's the point. Avatar falls back to
+// initials, which is the common case in a real directory, not an error case.
 const people = [
-  { id: '1', name: 'Alex Rivera', role: 'Admin' },
+  { id: '1', name: 'Alex Rivera', role: 'Admin', photo: 'https://i.pravatar.cc/80?img=12' },
   { id: '2', name: 'Jordan Lee', role: 'Editor' },
-  { id: '3', name: 'Sam Patel', role: 'Viewer' },
+  { id: '3', name: 'Sam Patel', role: 'Viewer', photo: 'https://i.pravatar.cc/80?img=32' },
   { id: '4', name: 'Riley Chen', role: 'Editor' },
 ]
 
@@ -28,11 +34,22 @@ export default function TeamMembersScreen() {
   return (
     <div className="min-h-screen bg-[var(--bg)]">
       <NavBar />
-      <div className="max-w-xl px-6 py-8">
-        <h1 className="mb-2 text-24 font-semibold text-[var(--text)]">Team & access</h1>
-        <p className="mb-6 text-14 text-[var(--text-secondary)]">
-          Invite members, then wire billing and integrations from the header nav.
-        </p>
+      <div className="max-w-2xl px-6 py-8">
+        <PageHeader
+          title="Team & access"
+          description="Invite members, then wire billing and integrations from the header nav."
+          badge={<StatusBadge tone="neutral">{people.length} members</StatusBadge>}
+          actions={
+            <BigButton
+              variant="ghost"
+              size="sm"
+              icon={<Icon name="plus" size={16} />}
+              onClick={() => setInviteOpen(true)}
+            >
+              Invite user
+            </BigButton>
+          }
+        />
 
         <ul className="m-0 list-none p-0">
           {people.map((p) => (
@@ -40,16 +57,16 @@ export default function TeamMembersScreen() {
               key={p.id}
               className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3 text-14"
             >
-              <span className="font-semibold text-[var(--text)]">{p.name}</span>
+              <span className="flex items-center gap-3">
+                <Avatar name={p.name} src={p.photo} size="md" />
+                <span className="font-semibold text-[var(--text)]">{p.name}</span>
+              </span>
               <span className="text-[var(--text-secondary)]">{p.role}</span>
             </li>
           ))}
         </ul>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <BigButton variant="ghost" onClick={() => setInviteOpen(true)}>
-            Invite user
-          </BigButton>
           <BigButton variant="primary" onClick={() => navigate('/billing')}>
             Open billing for seats
           </BigButton>

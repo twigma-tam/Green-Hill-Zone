@@ -1,0 +1,87 @@
+/* Green Hill — plain CSS implementation of two components.
+ *
+ * Why this file exists: one Figma component can carry several Code Connect
+ * mappings at once, and Dev Mode shows them as tabs (React | HTML | …). That
+ * capability is impossible to demonstrate honestly with only one
+ * implementation, so this is a real second one — no build step, no framework,
+ * just classes you can paste into an HTML page.
+ *
+ * It reuses the SAME semantic tokens as the React app rather than redeclaring
+ * colours, which is the point: two implementations, one token layer. Include
+ * `src/index.css` (or whatever ships those custom properties) before this file.
+ *
+ * Scope is deliberately two components. This is a teaching artifact for the
+ * multi-mapping workflow, not a second design system to keep in sync — see
+ * ROADMAP.md for the platform ports.
+ */
+
+.gh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-16);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-20);
+  font-weight: var(--font-weight-600);
+  cursor: pointer;
+  transition: background-color 120ms ease-out;
+}
+
+.gh-button--sm {
+  padding: var(--space-6) var(--space-12);
+  font-size: var(--font-size-13);
+}
+
+.gh-button--primary {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.gh-button--primary:hover { background: var(--brand-hover); }
+
+.gh-button--ghost {
+  background: transparent;
+  color: var(--brand-link);
+  border-color: var(--brand-link);
+}
+.gh-button--ghost:hover { background: var(--surface-hover); }
+
+.gh-button--danger {
+  background: var(--danger);
+  color: var(--on-brand);
+}
+.gh-button--danger:hover { background: var(--danger-hover); }
+
+/* Pressed reuses the hover fill plus a 1px nudge, same as the React component. */
+.gh-button:active { transform: translateY(1px); }
+
+.gh-button:disabled,
+.gh-button[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gh-button .gh-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.gh-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: var(--space-4) var(--space-10);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-16);
+  font-weight: var(--font-weight-600);
+}
+
+.gh-badge--neutral { background: var(--bg-alt); color: var(--text-secondary); }
+.gh-badge--success { background: var(--success-bg); color: var(--success); }
+.gh-badge--warning { background: var(--warning-bg); color: var(--warning); }
+.gh-badge--danger  { background: var(--danger-bg);  color: var(--danger); }

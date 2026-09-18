@@ -5,6 +5,8 @@ import { TableV2 } from '@/components/TableV2.jsx'
 import { StatusBadge } from '@/components/StatusBadge.jsx'
 import BigButton from '@/components/BigButton.jsx'
 import { Modal } from '@/components/Modal.jsx'
+import { PageHeader } from '@/components/PageHeader.jsx'
+import { Icon } from '@/components/Icon.jsx'
 
 const STATUS_TONE = { Paid: 'success', Overdue: 'danger' }
 
@@ -38,10 +40,21 @@ export default function BillingInvoices() {
     <div className="min-h-screen bg-[var(--bg)]">
       <NavBar />
       <div className="mx-auto max-w-3xl px-6 py-8">
-        <h1 className="mb-2 text-24 font-bold text-[var(--text)]">Billing & invoices</h1>
-        <p className="mb-4 text-14 text-[var(--text-secondary)]">
-          Finance flow — split charges by team or push totals to your ERP.
-        </p>
+        <PageHeader
+          title="Billing & invoices"
+          description="Finance flow — split charges by team or push totals to your ERP."
+          badge={<StatusBadge tone="danger">1 overdue</StatusBadge>}
+          actions={
+            <BigButton
+              variant="primary"
+              size="sm"
+              icon={<Icon name="check" size={16} />}
+              onClick={() => setConfirmOpen(true)}
+            >
+              Record payment
+            </BigButton>
+          }
+        />
 
         <p className="mb-4 text-14">
           <Link to="/billing/aging" className="font-semibold text-[var(--brand)] no-underline hover:underline">
@@ -52,9 +65,6 @@ export default function BillingInvoices() {
         <div className="mb-4 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
             <span className="text-15 font-semibold text-[var(--text)]">Open invoices</span>
-            <BigButton variant="primary" size="sm" onClick={() => setConfirmOpen(true)}>
-              Record payment
-            </BigButton>
           </div>
           <TableV2 headers={invoiceRows.headers} dataRows={invoiceRows.dataRows} />
         </div>

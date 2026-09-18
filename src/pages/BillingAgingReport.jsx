@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import NavBar from '@/components/NavBar.jsx'
 import BigButton from '@/components/BigButton.jsx'
+import { PageHeader } from '@/components/PageHeader.jsx'
 
 const buckets = [
   { label: 'Current', amount: '$18,400', color: 'var(--success)' },
@@ -24,8 +25,10 @@ export default function BillingAgingReport() {
           <span className="text-[var(--text-secondary)]">Aging</span>
         </p>
 
-        <h1 className="mb-2 text-24 font-bold text-[var(--text)]">Accounts receivable aging</h1>
-        <p className="mb-6 text-14 text-[var(--text-secondary)]">Snapshot only — not wired to a live ledger.</p>
+        <PageHeader
+          title="Accounts receivable aging"
+          description="Snapshot only — not wired to a live ledger."
+        />
 
         <div className="flex flex-col gap-3">
           {buckets.map((b) => (

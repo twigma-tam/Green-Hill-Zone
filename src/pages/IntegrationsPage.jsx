@@ -3,6 +3,9 @@ import NavBar from '@/components/NavBar.jsx'
 import { CardThing } from '@/components/CardThing.jsx'
 import BigButton from '@/components/BigButton.jsx'
 import { InlineBanner } from '@/components/InlineBanner.jsx'
+import { StatusBadge } from '@/components/StatusBadge.jsx'
+import { PageHeader } from '@/components/PageHeader.jsx'
+import { Icon } from '@/components/Icon.jsx'
 
 export default function IntegrationsPage() {
   const navigate = useNavigate()
@@ -11,17 +14,24 @@ export default function IntegrationsPage() {
     <div className="min-h-screen bg-[var(--bg-accent)]">
       <NavBar />
       <div className="mx-auto max-w-4xl px-6 py-8">
-        <h1 className="mb-2 text-22 font-bold text-[var(--brand-strong)]">Integrations & webhooks</h1>
-        <p className="mb-6 text-14 text-[var(--text-secondary)]">
-          Connect tools, then pipe metrics into reports or billing alerts.
-        </p>
+        <PageHeader
+          icon={<Icon name="alert" />}
+          title="Integrations & webhooks"
+          description="Connect tools, then pipe metrics into reports or billing alerts."
+          badge={<StatusBadge tone="warning">1 needs attention</StatusBadge>}
+        />
 
         <InlineBanner
           tone="warning"
           title="Segment needs a new API key"
           description="The last sync failed 40 minutes ago. Reconnect it from workspace settings to resume."
           action={
-            <BigButton variant="ghost" size="sm" onClick={() => navigate('/settings')}>
+            <BigButton
+              variant="ghost"
+              size="sm"
+              icon={<Icon name="external" size={16} />}
+              onClick={() => navigate('/settings')}
+            >
               Go to settings
             </BigButton>
           }
